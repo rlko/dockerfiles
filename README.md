@@ -25,7 +25,7 @@ docker run \
     -e FLOOD_SECRET="such-wow-secret" \
     -e RTORRENT_DOWNLOAD_RATE=1000 \
     -e RTORRENT_UPLOAD_RATE=500 \
-    flood-vpn
+    tweelon/flood-openvpn
 ```
 Todo
 
@@ -37,7 +37,7 @@ docker run \
     --name ovpn-proxy \
     --link seedwhale:flood \
     -p 8080:8080 \
-    flood-proxy
+    tweelon/flood-proxy
 
 ```
 Todo
