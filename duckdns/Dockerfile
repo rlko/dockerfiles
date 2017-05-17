@@ -10,8 +10,8 @@ RUN apk update;\
     echo "INIT" > /duck.log
 
 CMD sh /root/update.sh ;\
-    if grep -Fxq "KO" /duck.log; then ;\
-        echo "Refresh error. Subdomain or token invalid." ;\
+    if grep -vFxq "OK" /duck.log; then \
+        echo "Refresh error. DUCK_DOMAIN or DUCK_TOKEN invalid." ;\
         exit ;\
     fi \ 
     && crond \
