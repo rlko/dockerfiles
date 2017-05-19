@@ -34,6 +34,7 @@ session_openvpn() {
 }
 
 start_sessions() {
+    cron;
     exec >/dev/tty 2>/dev/tty </dev/tty; \
         screen -S rtorrent -d -m su - `id -un $UID` -c "(HOME='/tmp'; rtorrent)"; \
         screen -S flood -d -m su - `id -un $UID` -c "cd /flood; npm start"; \

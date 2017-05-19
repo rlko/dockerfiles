@@ -1,11 +1,12 @@
 FROM node:7.9.0-slim
 
-RUN apt-get update; apt-get upgrade -y; \
+RUN apt-get update; \
     apt-get install -y \
     make \
     gcc \
     g++ \
     git \
+    cron \
     curl \
     expect \
     openvpn \
@@ -35,23 +36,24 @@ RUN cd /tmp; \
     cd /tmp/${RTORRENT}; \
     ./configure --with-xmlrpc-c; \
     make; \
-    make install
-
-RUN git clone https://github.com/jfurrow/flood.git /flood; \
+    make install; \
+    git clone https://github.com/jfurrow/flood.git /flood; \
     cd /flood; \
     npm install --production; \
     ldconfig
 
-RUN apt-get remove --purge -y \
+RUN apt remove --purge --auto-remove -y \
     git \
     gcc \
     g++ \
     make \
-    && apt-get autoremove -y \
     && rm -fr /tmp/xmlrpc /tmp/${LIBTORRENT} /tmp/${RTORRENT}
 
 ENV UID=0 \
     GID=0 
+
+COPY ./import/meta /etc/cron.d/meta
+RUN chmod 0644 /etc/cron.d/meta
 
 COPY ./import/rtorrent.rc /tmp/.rtorrent.rc
 COPY ./import/config.js /flood/config.js
