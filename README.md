@@ -35,8 +35,8 @@ These variables are to fit permissions' volumes between host and container
 |`GID`|To set the group id. It's root (0) by default|
 
 ### Volumes
-`/data` : Torrents' downloads
-`/config` : Flood's db and config files (.ovpn, cert, key)
+*   `/data` : Torrents' downloads
+*   `/config` : Flood's db and config files (.ovpn, cert, key)
 
 ### Example
 #### Run
