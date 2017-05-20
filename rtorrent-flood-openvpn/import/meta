@@ -1,1 +1,0 @@
-0 0 * * * sh /scripts/clean_meta.sh
