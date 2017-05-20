@@ -2,7 +2,7 @@
 
 Inspired by [github.com/haugene/docker-transmission-openvpn/](https://github.com/haugene/docker-transmission-openvpn/)
 
-Torrenting container running [rtorrent](https://github.com/rakshasa/rtorrent)+[flood](https://github.com/jfurrow/flood) with OpenVPN.<br />
+Torrenting container running [rtorrent](https://github.com/rakshasa/rtorrent)+[flood](https://github.com/jfurrow/flood) with OpenVPN.
 Unlike haugene's docker, a .ovpn config file has to be provided on your own if you want to use vpn.
 
 ### Environment variables
@@ -18,7 +18,7 @@ Unlike haugene's docker, a .ovpn config file has to be provided on your own if y
 |----------|----------|
 |`FLOOD_BASE_URI`| Is root by default|
 |`FLOOD_SECRET`|**Change it!!**|
-|`FLOOD_ENABLE_SSL`|*(I haven't tried actually)*. Must be placed in the `config` volume|
+|`FLOOD_ENABLE_SSL`|*(I haven't tried actually)*. Must be placed in the `/config` volume|
 
 #### rtorrent
 | Variable | Comment |
@@ -56,6 +56,7 @@ docker run \
     -e FLOOD_SECRET="such-wow-secret" \
     -e RTORRENT_DOWNLOAD_RATE=1000 \
     -e RTORRENT_UPLOAD_RATE=500 \
+    -d \
     tweelon/flood-openvpn
 ```
 ###### Notes:
@@ -70,9 +71,18 @@ docker run \
     --name ovpn-proxy \
     --link seedwhale:flood \
     -p 8080:8080 \
+    -d \
     tweelon/flood-proxy
 
 ```
+Once you've run the main container and the proxy container, you can now access to http://localhost:8080
+
+### Post-deployment
+You can watch what's going on inside the container by running:
+*   `docker exec -it seedwhale bash`
+*   `screen -ls` To list screen sessions
+*   `script /dev/null`
+*   `screen -r rtorrent` or `screen -r flood` or `screen -r openvpn`
 
 ### Stuff todo
 *   docker-compose
