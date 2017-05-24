@@ -1,2 +1,2 @@
-0 0 * * * /bin/sh /scripts/clean_meta.sh
+0 0 * * * root /bin/sh /scripts/clean_meta.sh
 
