@@ -1,3 +1,0 @@
-[submodule "rtorrent-flood-openvpn"]
-	path = docker-flood-openvpn
-	url = https://github.com/rlko/docker-flood-openvpn.git
