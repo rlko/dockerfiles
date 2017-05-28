@@ -1,0 +1,2 @@
+0 0 * * * root /bin/sh /scripts/clean_meta.sh
+
