@@ -44,7 +44,8 @@ These variables are to fit permissions' volumes between host and container
 docker run \
     --rm -ti \
     --name seedwhale \
-    --privileged \
+    --cap-add=NET_ADMIN \
+    --device=/dev/net/tun \   
     --dns 8.8.8.8 --dns 8.8.4.4 \
     -v /opt/flood/data:/data \
     -v /opt/flood/config/:/config \
@@ -60,9 +61,9 @@ docker run \
     tweelon/flood-openvpn
 ```
 ###### Notes:
-*   `--privileged` is necessary to make openvpn works.
+*   ~~`--privileged` is necessary to make openvpn works.~~ Replaced by `--cap-add=NET_ADMIN` `--device=/dev/net/tun` to be less exposed.
 *   `--dns` perhaps too. See [this](https://github.com/haugene/docker-transmission-openvpn/#known-issues-tips-and-tricks).
-*   You may not access to the container even with `-p 3000:3000` because of the VPN. This is why we need a proxy. See [this](https://github.com/haugene/docker-transmission-openvpn/#access-the-webui) for further details
+*   You may not access to the container even with `-p 3000:3000` because of the VPN. This is why we need a proxy. See [this](https://github.com/haugene/docker-transmission-openvpn/#access-the-webui) for further details.
 
 #### Run proxy
 ```

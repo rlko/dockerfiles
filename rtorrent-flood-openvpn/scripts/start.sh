@@ -19,7 +19,7 @@ customize_rtorrent() {
 fix_permissions() {
     groupadd -f -g $GID shabadadoo
     id -un $UID > /dev/null 2>&1 || useradd -u $UID -g $GID kirakira
-    chown -R $UID:$GID /flood /config /data /tmp
+    chown -R $UID:$GID /config /data /tmp
 }
 
 session_openvpn() {
@@ -37,8 +37,8 @@ start_sessions() {
     cron;
     exec >/dev/tty 2>/dev/tty </dev/tty; \
         screen -S rtorrent -d -m su - `id -un $UID` -c "(HOME='/tmp'; rtorrent)"; \
-        screen -S flood -d -m su - `id -un $UID` -c "cd /flood; npm start"; \
-        session_openvpn; 
+        screen -S flood -d -m npm start; \
+        session_openvpn;
 }
 
 init_volumes
